@@ -1,17 +1,18 @@
 import React, {Component} from "react";
-import { Container, Navbar, Nav } from "react-bootstrap";
+import { Container, Navbar, Nav, Button } from "react-bootstrap";
 import logo from './logo192.png'
 import { Route, Routes } from "react-router-dom"
 
 import {Home} from '../Pages/Home'
 import {History} from '../Pages/History'
 import {Contacts} from '../Pages/Contacts'
+import {Registration} from '../Pages/Registration'
 
 
 export function Header() { 
         return (
             <>
-            <Navbar collapseOnSelect expand="md" bg="dark" variant="dark">
+            <Navbar collapseOnSelect expand="md" style={{backgroundColor: "#181718"}}>
                 <Container fluid>
                     <Navbar.Brand href="/">
                     <img
@@ -23,37 +24,26 @@ export function Header() {
                     />
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-                    <Navbar.Collapse id="responsive-navbar-nav">
-                        <Nav className="mr-auto">
-                            <Nav.Link href="/history">History</Nav.Link>
-                            <Nav.Link href="/contacts">Contacts</Nav.Link>
-                        </Nav>
-                    {/* <Nav>
-                        <label htmlFor="profileImageInput" className="nav-link">
-                        <img
-                            src={profileImage}
-                            alt="Profile"
-                            width="30"
-                            height="30"
-                            className="rounded-circle"
-                        />
-                        </label>
-                        <input
-                        type="file"
-                        id="profileImageInput"
-                        accept="image/*"
-
-                        style={{ display: 'none' }}
-                        onChange={handleImageChange}
-                        />
-                    </Nav> */}
-                    </Navbar.Collapse>
+                <Navbar.Collapse id="responsive-navbar-nav" style={{justifyContent: "space-between", paddingRight: "20px"}} >
+                    <Nav className="mr-auto">
+                        <Nav.Link href="/history">History</Nav.Link>
+                        <Nav.Link href="/contacts">Contacts</Nav.Link>
+                    </Nav>
+                    <Nav className="ml-auto">
+                        <Nav.Item >
+                            <Nav.Link href="/login">
+                                <Button variant="outline-light">Login</Button>
+                            </Nav.Link>
+                        </Nav.Item>
+                    </Nav>
+                </Navbar.Collapse>
                 </Container>
             </Navbar>
                     <Routes>
                         <Route exact path="/" element={<Home/>}/>
                         <Route exact path="/history" element={<History/>}/>
                         <Route exact path="/contacts" element={<Contacts/>}/>
+                        <Route exact path="/login" element={<Registration/>}/>
                     </Routes>
             </>
         );

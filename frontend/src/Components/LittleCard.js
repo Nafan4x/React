@@ -2,21 +2,21 @@ import React, {Component} from "react";
 import { Container } from "react-bootstrap";
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import imag from './rayan.jpg'
 
-export function LittleCard() { 
+export function LittleCard({ title, description }) { 
     return (
-        <Container>
-        <Card style={{ width: '18rem' }}>
-        <Card.Img variant="top" src="holder.js/100px180" />
+
+        <Card style={{ width: '18rem', margin: '10px' , backgroundColor: "#181718"}}>
+
+        <Card.Img variant="top" src={imag} />
         <Card.Body>
-        <Card.Title>Card Title</Card.Title>
+        <Card.Title>{title}</Card.Title>
         <Card.Text>
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
+            {description}
         </Card.Text>
         <Button variant="primary">Go somewhere</Button>
         </Card.Body>
         </Card>
-    </Container>
     );
 }
