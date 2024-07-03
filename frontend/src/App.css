@@ -71,7 +71,7 @@ body{
 }
 
 .custom-header .accordion-button {
-  background-color: #007bff; /* Цвет фона кнопки расширения */
+  background-color: #212121; /* Цвет фона кнопки расширения */
   color: white; /* Цвет текста кнопки расширения */
   border: none; /* Удаление границы кнопки */
   padding: 8px 16px; /* Отступы в кнопке */
@@ -79,5 +79,5 @@ body{
 }
 
 .custom-header .accordion-button:hover {
-  background-color: #0056b3; /* Цвет фона кнопки расширения при наведении */
+  background-color: #212121; /* Цвет фона кнопки расширения при наведении */
 }
