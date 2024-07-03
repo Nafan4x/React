@@ -7,7 +7,7 @@ import imag from './rayan.jpg'
 export function LittleCard({ title, description }) { 
     return (
 
-        <Card style={{ width: '18rem', margin: '10px' , backgroundColor: "#181718"}}>
+        <Card style={{ width: '18rem', margin: '10px'}} bg="secondary" text="white">
 
         <Card.Img variant="top" src={imag} />
         <Card.Body>
