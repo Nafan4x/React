@@ -1,10 +1,16 @@
 import React, {Component} from "react";
 import { Container, Navbar, Nav } from "react-bootstrap";
 import logo from './logo192.png'
+import { Route, Routes } from "react-router-dom"
 
-export default class Header extends Component { 
-    render() { 
+import {Home} from '../Pages/Home'
+import {History} from '../Pages/History'
+import {Contacts} from '../Pages/Contacts'
+
+
+export function Header() { 
         return (
+            <>
             <Navbar collapseOnSelect expand="md" bg="dark" variant="dark">
                 <Container fluid>
                     <Navbar.Brand href="/">
@@ -19,10 +25,8 @@ export default class Header extends Component {
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="mr-auto">
-                            <Nav.Link href="/">Home</Nav.Link>
-                            <Nav.Link href="/about">About us</Nav.Link>
+                            <Nav.Link href="/history">History</Nav.Link>
                             <Nav.Link href="/contacts">Contacts</Nav.Link>
-                            <Nav.Link href="/blog">Blog</Nav.Link>
                         </Nav>
                     {/* <Nav>
                         <label htmlFor="profileImageInput" className="nav-link">
@@ -46,7 +50,13 @@ export default class Header extends Component {
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
+                    <Routes>
+                        <Route exact path="/" element={<Home/>}/>
+                        <Route exact path="/history" element={<History/>}/>
+                        <Route exact path="/contacts" element={<Contacts/>}/>
+                    </Routes>
+            </>
         );
     }
-}
+
  
