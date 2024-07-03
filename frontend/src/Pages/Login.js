@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Container, Form, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 export function Login(){
     const [username, setUsername] = useState('');
@@ -16,10 +17,10 @@ export function Login(){
     };
 
     return (
-        <Container className="mt-5" style={{backgroundColor: "#181718"}}>
+        <Container bg="secondary" style={{ width: "30%", marginTop: '200px', minWidth: "600px" }}>
             <h2 className="text-center mb-4">Авторизация</h2>
             <Form onSubmit={handleLogin}>
-                <Form.Group controlId="formBasicUsername">
+                <Form.Group controlId="formBasicUsername" className="mb-3">
                     <Form.Label>Имя пользователя</Form.Label>
                     <Form.Control
                         type="text"
@@ -29,7 +30,7 @@ export function Login(){
                     />
                 </Form.Group>
 
-                <Form.Group controlId="formBasicPassword">
+                <Form.Group controlId="formBasicPassword" className="mb-3">
                     <Form.Label>Пароль</Form.Label>
                     <Form.Control
                         type="password"
@@ -39,7 +40,7 @@ export function Login(){
                     />
                 </Form.Group>
 
-                <Button variant="primary" type="submit" className="w-100 mt-3">
+                <Button variant="outline-light" type="submit" className="w-100 mt-3">
                     Войти
                 </Button>
             </Form>
