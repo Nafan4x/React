@@ -5,7 +5,7 @@ import { Container } from "react-bootstrap";
 
 export function History(){ 
         return (
-            <Container >
+            <Container fluid style={{width:'90%'}} >
                 <Carusel/>
                 <Htext/>
             </Container>
