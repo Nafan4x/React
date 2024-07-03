@@ -44,5 +44,18 @@
 }
 
 body{
-  background-color: #282c34;
+  background-color: #090809;
+  color: #fdf8f4;
+}
+
+.card{
+  color: #c9c9c9;
+}
+
+.nav-link{
+  color: #c9c9c9;
+}
+.custom-col-5 {
+  flex: 0 0 20%;
+  max-width: 20%;
 }
