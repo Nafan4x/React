@@ -7,12 +7,13 @@ import {Home} from '../Pages/Home'
 import {History} from '../Pages/History'
 import {Contacts} from '../Pages/Contacts'
 import {Registration} from '../Pages/Registration'
+import {Login} from '../Pages/Login'
 
 
 export function Header() { 
         return (
             <>
-            <Navbar collapseOnSelect expand="md" style={{backgroundColor: "#181718"}}>
+            <Navbar collapseOnSelect expand="md" bg="secondary">
                 <Container fluid>
                     <Navbar.Brand href="/">
                     <img
@@ -32,7 +33,12 @@ export function Header() {
                     <Nav className="ml-auto">
                         <Nav.Item >
                             <Nav.Link href="/login">
-                                <Button variant="outline-light">Login</Button>
+                                <Button variant="outline-light">Вход</Button>
+                            </Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item >
+                            <Nav.Link href="/registration">
+                                <Button variant="outline-light">Регистрация</Button>
                             </Nav.Link>
                         </Nav.Item>
                     </Nav>
@@ -43,7 +49,8 @@ export function Header() {
                         <Route exact path="/" element={<Home/>}/>
                         <Route exact path="/history" element={<History/>}/>
                         <Route exact path="/contacts" element={<Contacts/>}/>
-                        <Route exact path="/login" element={<Registration/>}/>
+                        <Route exact path="/login" element={<Login/>}/>
+                        <Route exact path="/registration" element={<Registration/>}/>
                     </Routes>
             </>
         );
