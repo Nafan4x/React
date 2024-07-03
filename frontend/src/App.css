@@ -59,3 +59,7 @@ body{
   flex: 0 0 20%;
   max-width: 20%;
 }
+[data-bs-theme=dark].carousel .carousel-caption{
+  color:#FAFAFA ;
+  
+}
