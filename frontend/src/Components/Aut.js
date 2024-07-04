@@ -7,7 +7,17 @@ import Yas from '../Components/Yasuo.jpg'
 export function Autor() {
   return (
     <Figure>
-      <Figure.Image
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+            <Figure.Image
         width={200}
         height={200}
         alt="171x180"
