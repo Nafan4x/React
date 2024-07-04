@@ -8,6 +8,7 @@ import {History} from '../Pages/History'
 import {Contacts} from '../Pages/Contacts'
 import {Registration} from '../Pages/Registration'
 import {Login} from '../Pages/Login'
+import {Profile} from '../Pages/Profile'
 
 
 export function Header() { 
@@ -15,7 +16,7 @@ export function Header() {
             <>
             <Navbar collapseOnSelect expand="md" bg="secondary">
                 <Container fluid>
-                    <Navbar.Brand href="/">
+                    <Navbar.Brand href="/" style={{display: "inherit"}}>
                     <img
                         src={logo}
                         height="40"
@@ -23,6 +24,7 @@ export function Header() {
                         className="d-inline-block align-top"
                         alt="Logo"
                     />
+                    <h3 style={{color: 'white', marginLeft: '5px'}}>DronePedia</h3>
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav" style={{justifyContent: "space-between", paddingRight: "20px"}} >
@@ -51,6 +53,7 @@ export function Header() {
                         <Route exact path="/contacts" element={<Contacts/>}/>
                         <Route exact path="/login" element={<Login/>}/>
                         <Route exact path="/registration" element={<Registration/>}/>
+                        <Route exact path="/profile" element={<Profile/>}/>
                     </Routes>
             </>
         );
