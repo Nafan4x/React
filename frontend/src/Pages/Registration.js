@@ -1,29 +1,45 @@
 
 
-import React, { useState } from 'react';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import authService from '../services/authService';
 
 export function Registration(){
+
     const [formData, setFormData] = useState({
         username: '',
         email: '',
         password: '',
         confirmPassword: ''
-    });
-
-    const handleChange = (e) => {
+      });
+    
+      const navigate = useNavigate();
+    
+      const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData({
-            ...formData,
-            [name]: value
-        });
-    };
-
-    const handleSubmit = (e) => {
+        setFormData((prevData) => ({
+          ...prevData,
+          [name]: value
+        }));
+      };
+    
+      const handleSubmit = async (e) => {
         e.preventDefault();
-        // Здесь можно добавить логику для отправки данных на сервер
-        console.log(formData);
-    };
+        const { username, email, password, confirmPassword } = formData;
+    
+        if (password !== confirmPassword) {
+          alert("Passwords do not match");
+          return;
+        }
+    
+        try {
+          await authService.register(username, email, password);
+          navigate('/login');
+        } catch (error) {
+          console.error("Registration failed", error);
+        }
+      };
 
     return (
         <Container  bg="secondary" style={{ width: "80%", marginTop: '200px', minWidth: "600px" }}>

@@ -9,6 +9,7 @@ import {Contacts} from '../Pages/Contacts'
 import {Registration} from '../Pages/Registration'
 import {Login} from '../Pages/Login'
 import {Profile} from '../Pages/Profile'
+import { DronPage } from "../Pages/DronPage";
 
 
 export function Header() { 
@@ -54,6 +55,8 @@ export function Header() {
                         <Route exact path="/login" element={<Login/>}/>
                         <Route exact path="/registration" element={<Registration/>}/>
                         <Route exact path="/profile" element={<Profile/>}/>
+                        <Route exact path="/card/:id" element={<DronPage/>}/>
+                        
                     </Routes>
             </>
         );

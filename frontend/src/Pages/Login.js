@@ -1,32 +1,35 @@
-import React, { useState } from 'react';
 import { Container, Form, Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import authService from '../services/authService';
 
 export function Login(){
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
 
-    const handleLogin = (e) => {
-        e.preventDefault();
-        // Ваша логика обработки входа здесь (например, отправка данных на сервер)
-        console.log('Username:', username);
-        console.log('Password:', password);
-        // Сброс формы
-        setUsername('');
-        setPassword('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const navigate = useNavigate();
+  
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      try {
+        await authService.login(email, password);
+        navigate('/home');
+      } catch (error) {
+        console.error("Login failed", error);
+      }
     };
 
     return (
         <Container bg="secondary" style={{ width: "30%", marginTop: '200px', minWidth: "600px" }}>
             <h2 className="text-center mb-4">Авторизация</h2>
-            <Form onSubmit={handleLogin}>
-                <Form.Group controlId="formBasicUsername" className="mb-3">
-                    <Form.Label>Имя пользователя</Form.Label>
+            <Form onSubmit={handleSubmit}>
+                <Form.Group controlId="formBasicEmail" className="mb-3">
+                    <Form.Label>Почта</Form.Label>
                     <Form.Control
                         type="text"
-                        placeholder="Введите имя пользователя"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
+                        placeholder="Введите почту"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)} required
                     />
                 </Form.Group>
 
@@ -36,7 +39,7 @@ export function Login(){
                         type="password"
                         placeholder="Введите пароль"
                         value={password}
-                        onChange={(e) => setPassword(e.target.value)}
+                        onChange={(e) => setPassword(e.target.value)} required 
                     />
                 </Form.Group>
 
