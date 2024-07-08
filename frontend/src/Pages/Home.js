@@ -14,18 +14,20 @@ const cardData = [
 
 export function Home(){ 
     // const cardData = GetProducts();
-    
-    const cardData = GetProducts();
+    const {data, loading,error} = GetProducts();
     console.log("asdsad", cardData);
 
-    while (cardData == "Loading"){
+    if (loading){
         return <div>Loading</div>
     }
-
+    if (error){
+        return <div>{error}</div>
+    }
+    
     return (
         <Container style={{ marginTop: '50px'}}>
             <Row className="g-4">
-                {cardData.map((card, index) => (
+                {data.map((card, index) => (
                     <Col key={index}  xs={15} sm={6} md={4} lg={3} >
                         <LittleCard  data={card} />
                     </Col>

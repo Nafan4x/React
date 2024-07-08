@@ -13,7 +13,7 @@ export function Login(){
       e.preventDefault();
       try {
         await authService.login(email, password);
-        navigate('/home');
+        navigate('/profile');
       } catch (error) {
         console.error("Login failed", error);
       }
