@@ -14,7 +14,6 @@ const register = async (username, email, password) => {
         password
       });
   return register.data;
-  localStorage.setItem("toke", response.data.token)
 };
 
 const login = (email, password) => {
