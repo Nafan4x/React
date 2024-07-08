@@ -4,15 +4,15 @@ from django.db import models
 class Accounts(models.Model):
 
     id_accounts = models.AutoField(primary_key=True)
-    username = models.CharField(max_length=50, blank=False, null=False)
-    email = models.CharField(max_length=50, blank=False, null=False)
+    username = models.CharField(max_length=50, blank=False, null=False, unique=True)
+    email = models.CharField(max_length=50, blank=False, null=False, unique=True)
     password = models.CharField(max_length=50, blank=False, null=False)
 
 
 class Products(models.Model):
 
     id_product = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=50, blank=False, null=False)
+    name = models.CharField(max_length=50, blank=False, null=False, unique=True)
     price = models.BigIntegerField(blank=False, null=False)
     description = models.CharField(max_length=10000, blank=False, null=False)
     brand = models.CharField(max_length=50, default=None)
