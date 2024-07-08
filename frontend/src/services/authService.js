@@ -1,14 +1,14 @@
 import axios from 'axios';
 
-const API_URL = 'https://example.com/api/auth/';
+const API_URL = 'http://127.0.0.1:8000/api';
 
 const $api = axios.create({
     baseURL: API_URL
-})
+  })
 
 
 const register = async (username, email, password) => {
-    const response = await $api.post('register', {
+    const response = await $api.post('accounts/', {
         username,
         email,
         password
@@ -17,7 +17,7 @@ const register = async (username, email, password) => {
 };
 
 const login = (email, password) => {
-  return axios.post(API_URL + 'login', {
+  return axios.post(API_URL + '/login', {
     email,
     password
   }).then(response => {

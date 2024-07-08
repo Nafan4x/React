@@ -6,14 +6,14 @@ import imag from './rayan.jpg'
 import { Link } from "react-router-dom";
 
 export function LittleCard({data}) {
-    const {title, id, description} = data; 
+    const {name, id_product, description} = data; 
     return (
-        <Link to={`/card/${id}`}>
+        <Link to={`/card/${id_product}`}>
             <Card style={{ width: '18rem', margin: '10px'}} bg="secondary" text="white">
 
             <Card.Img variant="top" src={imag} />
             <Card.Body>
-            <Card.Title>{title}</Card.Title>
+            <Card.Title>{name}</Card.Title>
             <Card.Text>
                 {description}
             </Card.Text>
