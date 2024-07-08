@@ -55,7 +55,9 @@ class LoginAPIView(APIView):
             try:
                 account = Accounts.objects.get(email=email)
                 if password == account.password:
-                    return Response({"message": "Login successful"}, status=status.HTTP_200_OK)
+                    return Response({"message": "Login successful",
+                                     "id_accounts": account.id_accounts},
+                                    status=status.HTTP_200_OK)
                 else:
                     return Response({"error": "Invalid password"}, status=status.HTTP_401_UNAUTHORIZED)
             except Accounts.DoesNotExist:
