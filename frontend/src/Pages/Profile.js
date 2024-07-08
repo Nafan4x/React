@@ -1,7 +1,10 @@
 import React, { useState, useRef } from 'react';
+import { Navigate } from 'react-router-dom';
 import { Form, Button, Container, Row, Col, Image } from 'react-bootstrap';
 
+
 export function Profile() {
+    
     const [formData, setFormData] = useState({
         username: '',
         email: '',
@@ -43,6 +46,12 @@ export function Profile() {
         // Здесь можно добавить логику для отправки данных на сервер
         console.log(formData);
     };
+
+    const userStr = localStorage.getItem('user');
+    if (!userStr) {
+        return <Navigate to="/login" />;
+    }
+    else{
 
     return (
         <Container>
@@ -120,4 +129,5 @@ export function Profile() {
             </Row>
         </Container>
     );
+}
 }
