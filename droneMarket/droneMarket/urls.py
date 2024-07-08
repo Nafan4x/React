@@ -6,6 +6,8 @@ from rest_framework import routers
 
 from main.views import AccountsApi, ProductsApi, ReviewsApi, LikesApi
 
+from main.views import LoginAPIView
+
 router = routers.DefaultRouter()
 router.register(r'api/accounts', AccountsApi)
 router.register(r'api/products', ProductsApi)
@@ -16,4 +18,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('main.urls')),
     path('', include(router.urls)),
+    path('api/login/', LoginAPIView.as_view(), name='login'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

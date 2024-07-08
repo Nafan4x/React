@@ -4,6 +4,7 @@ from django.db import models
 class Accounts(models.Model):
 
     id_accounts = models.AutoField(primary_key=True)
+    username = models.CharField(max_length=50, blank=False, null=False)
     email = models.CharField(max_length=50, blank=False, null=False)
     password = models.CharField(max_length=50, blank=False, null=False)
 
