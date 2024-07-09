@@ -1,5 +1,6 @@
 import { useParams } from "react-router"
 import {GetProductById} from '../services/prodService.js';
+import {DronItem} from '../Components/DronItem.js';
 
 export function DronPage() {
     const params= useParams();
@@ -7,9 +8,6 @@ export function DronPage() {
     const {data, loading, error} = GetProductById(params.id);
     console.log(data);
     return(
-        
-        <div>
-            Дрон № {params.id} ебать его в рот!
-        </div>
+        <DronItem/>
     )
 }
