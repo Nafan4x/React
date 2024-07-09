@@ -8,6 +8,22 @@ class AccountSerializer(serializers.ModelSerializer):
         model = Accounts
         fields = '__all__'
 
+    def validate_email(self, value):
+        if self.instance:  # это условие исключает проверку email текущего объекта при обновлении
+            if Accounts.objects.filter(email=value).exclude(pk=self.instance.pk).exists():
+                raise serializers.ValidationError("This email is already in use.")
+        elif Accounts.objects.filter(email=value).exists():
+            raise serializers.ValidationError("This email is already in use.")
+        return value
+
+    def validate_username(self, value):
+        if self.instance:  # это условие исключает проверку username текущего объекта при обновлении
+            if Accounts.objects.filter(username=value).exclude(pk=self.instance.pk).exists():
+                raise serializers.ValidationError("This username is already in use.")
+        elif Accounts.objects.filter(username=value).exists():
+            raise serializers.ValidationError("This username is already in use.")
+        return value
+
 
 class ProductsSerializer(serializers.ModelSerializer):
     class Meta:

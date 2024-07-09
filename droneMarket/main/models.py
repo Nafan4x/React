@@ -7,6 +7,7 @@ class Accounts(models.Model):
     username = models.CharField(max_length=50, blank=False, null=False, unique=True)
     email = models.CharField(max_length=50, blank=False, null=False, unique=True)
     password = models.CharField(max_length=50, blank=False, null=False)
+    photo = models.ImageField(upload_to='uploads/', default='uploads/base_avatar.jpg')
 
 
 class Products(models.Model):
