@@ -3,6 +3,7 @@ import { Navigate } from 'react-router-dom';
 import { Form, Button, Container, Row, Col, Image } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom'; // Импортируем хук useNavigate
 import { UserContext } from '../Context/UserContext';
+import axios from 'axios';
 
 
 export function Profile() {
@@ -13,8 +14,7 @@ export function Profile() {
         username: '',
         email: '',
         password: '',
-        confirmPassword: '',
-        avatar: null
+        photo: null
     });
 
     const fileInputRef = useRef(null);
@@ -34,7 +34,7 @@ export function Profile() {
             reader.onload = (upload) => {
                 setFormData({
                     ...formData,
-                    avatar: upload.target.result
+                    photo: upload.target.result
                 });
             };
             reader.readAsDataURL(file);
@@ -45,11 +45,7 @@ export function Profile() {
         fileInputRef.current.click();
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        // Здесь можно добавить логику для отправки данных на сервер
-        console.log(formData);
-    };
+    
 
     const handleLogout = () => {
         // Ваш код для обработки выхода из профиля
@@ -58,10 +54,31 @@ export function Profile() {
     };
 
     const userStr = localStorage.getItem('user');
+    let res = null;
+
     if (!userStr) {
         return <Navigate to="/login" />;
     }
     else{
+        const id_ac = JSON.parse(userStr).id_accounts
+        const handleSubmit = async (e) => {
+            e.preventDefault();
+            try {
+                const response = await axios.put('http://127.0.0.1:8000/api/accounts/'+id_ac+'/', formData, {
+                });
+                //setMessage('Profile updated successfully!');
+                
+                if (response.status == 200){
+                    document.getElementById("accept").style.display = 'block';
+                    console.log(response.status)
+                }
+            } catch (error) {
+                //setMessage('Error updating profile.');
+                console.error(error);
+            }
+            
+        };
+        console.log(res)
     
 
     return (
@@ -77,7 +94,7 @@ export function Profile() {
                                 style={{ paddingBottom: '10px', paddingRight: '30px',paddingLeft: '30px', borderTopLeftRadius: '10px', borderBottomLeftRadius: '10px' }}
                             >
                                 <Image
-                                    src={formData.avatar || 'https://via.placeholder.com/150'}
+                                    src={formData.photo || 'https://via.placeholder.com/150'}
                                     roundedCircle
                                     style={{ width: '150px', height: '150px', objectFit: 'cover', cursor: 'pointer', marginTop: '20%' }}
                                     onClick={handleAvatarClick}
@@ -131,16 +148,9 @@ export function Profile() {
                                     />
                                 </Form.Group>
 
-                                <Form.Group controlId="formConfirmPassword" className="mb-4">
-                                    <Form.Label>Подтвердите новый пароль</Form.Label>
-                                    <Form.Control
-                                        type="password"
-                                        placeholder="Подтвердите новый пароль"
-                                        name="confirmPassword"
-                                        value={formData.confirmPassword}
-                                        onChange={handleChange}
-                                    />
-                                </Form.Group>
+                                <p id='accept' style={{display: 'none'}}>Успешно</p>
+
+                                
 
                                 <Button variant="outline-light" type="submit" className="w-100 mt-3">
                                     Обновить профиль
