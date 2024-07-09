@@ -1,9 +1,11 @@
 import React, { useState, useRef } from 'react';
 import { Navigate } from 'react-router-dom';
 import { Form, Button, Container, Row, Col, Image } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom'; // Импортируем хук useNavigate
 
 
 export function Profile() {
+    const navigate = useNavigate(); // Используем хук useNavigate
     
     const [formData, setFormData] = useState({
         username: '',
@@ -47,32 +49,51 @@ export function Profile() {
         console.log(formData);
     };
 
+    const handleLogout = () => {
+        // Ваш код для обработки выхода из профиля
+        localStorage.removeItem('user');
+        navigate('/login'); // Редирект на страницу логина
+    };
+
     const userStr = localStorage.getItem('user');
     if (!userStr) {
         return <Navigate to="/login" />;
     }
     else{
+    
 
     return (
         <Container>
             <Row className="justify-content-md-center mt-5">
-                <Col md={8} style={{marginTop: "100px"}}>
+                <Col md={8} style={{marginTop: "3%"}}>
                     <h2 className="mb-4">Профиль</h2>
                     <Form onSubmit={handleSubmit}>
                         <Row>
-                            <Col md={4} className="bg-secondary text-center" style={{padding: '30px', borderTopLeftRadius: '10px' , borderBottomLeftRadius:'10px'}}>
-                            <Image
+                        <Col 
+                                md={4} 
+                                className="bg-secondary text-center d-flex flex-column align-items-center"
+                                style={{ paddingBottom: '10px', paddingRight: '30px',paddingLeft: '30px', borderTopLeftRadius: '10px', borderBottomLeftRadius: '10px' }}
+                            >
+                                <Image
                                     src={formData.avatar || 'https://via.placeholder.com/150'}
                                     roundedCircle
                                     style={{ width: '150px', height: '150px', objectFit: 'cover', cursor: 'pointer', marginTop: '20%' }}
                                     onClick={handleAvatarClick}
                                 />
-                                <Form.Control 
+                                <Form.Control
                                     type="file"
                                     ref={fileInputRef}
                                     style={{ display: 'none' }}
                                     onChange={handleAvatarChange}
                                 />
+                                <Button
+                                    variant="outline-light"
+                                    className="mt-auto w-100"
+                                    onClick={handleLogout}
+                                    
+                                >
+                                    Выйти из профиля
+                                </Button>
                             </Col>
                             <Col md={8} style={{padding: '10px'}}>
                                 <Form.Group controlId="formUsername" className="mb-3">
