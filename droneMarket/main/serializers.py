@@ -1,6 +1,12 @@
 from rest_framework import serializers
 
-from .models import Accounts, Products, Reviews, Likes
+from .models import Accounts, Products, Reviews, Likes, Images
+
+
+class ImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Images
+        fields = ['id_image', 'file']
 
 
 class AccountSerializer(serializers.ModelSerializer):
@@ -26,9 +32,34 @@ class AccountSerializer(serializers.ModelSerializer):
 
 
 class ProductsSerializer(serializers.ModelSerializer):
+    images = ImageSerializer(many=True, required=False)
+
     class Meta:
         model = Products
-        fields = '__all__'
+        fields = [
+            'id_product', 'name', 'price', 'description', 'brand', 'video_transmission',
+            'powering', 'transmitter_protocol', 'propeller_size', 'frame_size', 'power_connector',
+            'version', 'number_of_rating', 'overall_rating', 'images'
+        ]
+
+    def create(self, validated_data):
+        images_data = validated_data.pop('images', [])
+        product = Products.objects.create(**validated_data)
+        for image_data in images_data:
+            Images.objects.create(product=product, **image_data)
+        return product
+
+    def update(self, instance, validated_data):
+        images_data = validated_data.pop('images', [])
+        for attr, value in validated_data.items():
+            setattr(instance, attr, value)
+        instance.save()
+
+        instance.images.all().delete()
+        for image_data in images_data:
+            Images.objects.create(product=instance, **image_data)
+
+        return instance
 
 
 class ReviewsSerializer(serializers.ModelSerializer):
@@ -41,6 +72,12 @@ class LikesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Likes
         fields = '__all__'
+
+
+class ImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Images
+        fields = ['id_image', 'file']
 
 
 class LoginSerializer(serializers.Serializer):

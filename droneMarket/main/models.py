@@ -42,3 +42,10 @@ class Likes(models.Model):
     id_review = models.AutoField(primary_key=True)
     id_accounts = models.ForeignKey(Accounts, on_delete=models.CASCADE, to_field='id_accounts')
     id_product = models.ForeignKey(Products, on_delete=models.CASCADE, to_field='id_product')
+
+
+class Images(models.Model):
+
+    id_image = models.AutoField(primary_key=True)
+    id_product = models.ForeignKey(Products, on_delete=models.CASCADE, to_field='id_product')
+    file = models.FileField(upload_to='upldfile/')
