@@ -1,19 +1,22 @@
 import { Container, Form, Button } from 'react-bootstrap';
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import authService from '../services/authService';
+import React, { useContext, useState } from 'react';
+import { Navigate, useNavigate } from 'react-router-dom';
+import {login} from '../services/authService';
+import { UserContext } from '../Context/UserContext';
 
 export function Login(){
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const navigate = useNavigate();
+    const {setUser, user} = useContext(UserContext);
+    
+    if (user) return <Navigate to={"/profile"}/>
   
     const handleSubmit = async (e) => {
       e.preventDefault();
       try {
-        await authService.login(email, password);
-        navigate('/profile');
+        const res = await login(email, password);
+        setUser(res);
       } catch (error) {
         console.error("Login failed", error);
       }

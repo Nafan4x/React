@@ -1,11 +1,13 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useContext } from 'react';
 import { Navigate } from 'react-router-dom';
 import { Form, Button, Container, Row, Col, Image } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom'; // Импортируем хук useNavigate
+import { UserContext } from '../Context/UserContext';
 
 
 export function Profile() {
     const navigate = useNavigate(); // Используем хук useNavigate
+    const {setUser} = useContext(UserContext);
     
     const [formData, setFormData] = useState({
         username: '',
@@ -51,7 +53,7 @@ export function Profile() {
 
     const handleLogout = () => {
         // Ваш код для обработки выхода из профиля
-        localStorage.removeItem('user');
+        setUser(null);
         navigate('/login'); // Редирект на страницу логина
     };
 

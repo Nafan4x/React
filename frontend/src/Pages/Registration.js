@@ -3,7 +3,7 @@
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import authService from '../services/authService';
+import {register} from '../services/authService';
 
 export function Registration(){
 
@@ -34,7 +34,7 @@ export function Registration(){
         }
     
         try {
-          await authService.register(username, email, password);
+          await register(username, email, password);
           navigate('/login');
         } catch (error) {
           console.error("Registration failed", error);
