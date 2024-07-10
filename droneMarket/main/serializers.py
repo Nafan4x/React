@@ -43,21 +43,23 @@ class ProductsSerializer(serializers.ModelSerializer):
         ]
 
     def create(self, validated_data):
-        images_data = validated_data.pop('images', [])
+        images_data = self.context['request'].FILES
         product = Products.objects.create(**validated_data)
-        for image_data in images_data:
-            Images.objects.create(product=product, **image_data)
+        for image_key in images_data:
+            image_file = images_data[image_key]
+            Images.objects.create(id_product=product, file=image_file)
         return product
 
     def update(self, instance, validated_data):
-        images_data = validated_data.pop('images', [])
+        images_data = self.context['request'].FILES
         for attr, value in validated_data.items():
             setattr(instance, attr, value)
         instance.save()
 
         instance.images.all().delete()
-        for image_data in images_data:
-            Images.objects.create(product=instance, **image_data)
+        for image_key in images_data:
+            image_file = images_data[image_key]
+            Images.objects.create(id_product=instance, file=image_file)
 
         return instance
 

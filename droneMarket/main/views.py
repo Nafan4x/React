@@ -2,8 +2,9 @@ from django.shortcuts import render
 from rest_framework import viewsets
 from django_filters.rest_framework import DjangoFilterBackend
 
-from .models import Accounts, Products, Reviews, Likes
-from .serializers import AccountSerializer, ProductsSerializer, ReviewsSerializer, LikesSerializer, LoginSerializer
+from .models import Accounts, Products, Reviews, Likes, Images
+from .serializers import AccountSerializer, ProductsSerializer, ReviewsSerializer, LikesSerializer, LoginSerializer, \
+    ImageSerializer
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -43,6 +44,13 @@ class LikesApi(viewsets.ModelViewSet):
     serializer_class = LikesSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['id_review', 'id_accounts', 'id_product']
+
+
+class ImagesApi(viewsets.ModelViewSet):
+    queryset = Images.objects.all()
+    serializer_class = ImageSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['id_product', 'file']
 
 
 class LoginAPIView(APIView):

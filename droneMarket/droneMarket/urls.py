@@ -4,15 +4,14 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 
-from main.views import AccountsApi, ProductsApi, ReviewsApi, LikesApi
-
-from main.views import LoginAPIView
+from main.views import AccountsApi, ProductsApi, ReviewsApi, LikesApi, ImagesApi, LoginAPIView
 
 router = routers.DefaultRouter()
 router.register(r'api/accounts', AccountsApi)
 router.register(r'api/products', ProductsApi)
 router.register(r'api/reviews', ReviewsApi)
 router.register(r'api/likes', LikesApi)
+router.register(r'api/images', ImagesApi)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
