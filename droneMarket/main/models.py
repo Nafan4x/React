@@ -14,18 +14,18 @@ class Products(models.Model):
 
     id_product = models.AutoField(primary_key=True)
     name = models.CharField(max_length=50, blank=False, null=False, unique=True)
-    price = models.BigIntegerField(blank=False, null=False)
+    price = models.CharField(max_length=50, default='По запросу')
     description = models.CharField(max_length=10000, blank=False, null=False)
-    brand = models.CharField(max_length=50, default=None)
-    video_transmission = models.CharField(max_length=50, default=None)
-    powering = models.CharField(max_length=50, default=None)
-    transmitter_protocol = models.CharField(max_length=50, default=None)
-    propeller_size = models.CharField(max_length=50, default=None)
-    frame_size = models.CharField(max_length=50, default=None)
-    power_connector = models.CharField(max_length=50, default=None)
-    version = models.CharField(max_length=50, default=None)
-    number_of_rating = models.BigIntegerField(default=0)
-    overall_rating = models.BigIntegerField(default=0)
+    brand = models.CharField(max_length=50, default=None, null=True)
+    video_transmission = models.CharField(max_length=50, default=None, null=True)
+    powering = models.CharField(max_length=50, default=None, null=True)
+    transmitter_protocol = models.CharField(max_length=50, default=None, null=True)
+    propeller_size = models.CharField(max_length=50, default=None, null=True)
+    frame_size = models.CharField(max_length=50, default=None, null=True)
+    power_connector = models.CharField(max_length=50, default=None, null=True)
+    version = models.CharField(max_length=50, default=None, null=True)
+    number_of_rating = models.BigIntegerField(default=0, null=True)
+    overall_rating = models.BigIntegerField(default=0, null=True)
 
 
 class Reviews(models.Model):
@@ -47,5 +47,5 @@ class Likes(models.Model):
 class Images(models.Model):
 
     id_image = models.AutoField(primary_key=True)
-    id_product = models.ForeignKey(Products, on_delete=models.CASCADE, to_field='id_product')
+    id_product = models.ForeignKey(Products, on_delete=models.CASCADE, related_name='images', to_field='id_product')
     file = models.FileField(upload_to='upldfile/')
