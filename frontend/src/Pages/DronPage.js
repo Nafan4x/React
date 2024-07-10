@@ -4,45 +4,60 @@ import React from 'react';
 import { Container, Row, Col, Image, Card } from 'react-bootstrap';
 import '../Components/coworking.css'
 import imag from '../Components/main-image.jpg';
+import Carousel from 'react-bootstrap/Carousel';
+import Mult from '../Components/Multy.jpg'
+import Nonekr from '../Components/Nkr.jpg'
+import Copter from '../Components/Helic.jpg'
+import l1 from '../Components/images/ins/l1.jpg'
+import l2 from '../Components/images/ins/l2.jpg'
+import l3 from '../Components/images/ins/l3.jpg'
+import l4 from '../Components/images/ins/l4.jpg'
+import {Dronspec} from '../Components/Dronspec.js'
+
 
 export function DronPage() {
+    const ar = [l1,l2,l3,l4];
     const params= useParams();
     console.log(params);
     const {data, loading, error} = GetProductById(params.id);
     console.log(data);
-    const product = {
-        big_img: imag,
-        small_img: [
-            imag,
-            imag,
-            imag,
-            imag
-        ],
-        name: 'Sample Product',
-        rating: 4.5,
-        address: '123 Main St, Anytown, USA',
-        working_time: '09:00 - 19:00',
-        description: 'This is a sample product description.'
-      };
     return(
-        <Container fluid className="product-details">
+        <Container fluid className="product-details" style={{marginTop: '20px'}}>
         <Row className="justify-content-center align-items-center">
           <Col md={6} lg={6} className="left-image mb-4 mb-md-0" style={{marginTop: '-20px'}}>
-            <Image src={product.big_img} fluid alt="Product Image" />
+          <Carousel data-bs-theme="dark">
+      <Carousel.Item>
+        <img
+          className="d-block w-100"
+          src={ ar[params.id-5] }
+          alt="Multy"
+        />
+      </Carousel.Item>
+      <Carousel.Item>
+        <img
+          className="d-block w-100"
+          src={ Nonekr }
+          alt="Non"
+        />
+      </Carousel.Item>
+      <Carousel.Item>
+        <img
+          className="d-block w-100"
+          src={ Copter }
+          alt="Cop"
+        />
+      </Carousel.Item>
+    </Carousel>
           </Col>
           <Col md={6} lg={6} className="right-images">
-            <Row>
-              {product.small_img.map((item, index) => (
-                <Col md={6} key={index} className="mb-4">
-                  <Image src={item} fluid alt={`Right Image ${index + 1}`} />
-                </Col>
-              ))}
-            </Row>
+           <h1>{data.name}</h1>
+           <h3>Примерная цена: {data.price}</h3>
           </Col>
         </Row>
+        <Dronspec data={data}/>
         <Row>
           <Col md={12}>
-            <Card bg="secondary" text="white">
+            <Card bg="dark" text="white" style={{marginTop: '20px'}}>
               <Card.Body>
               <h2 className="mb-0">{data.name}</h2>
                 {/* <div className="d-flex align-items-center mb-3">

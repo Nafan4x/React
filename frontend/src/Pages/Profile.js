@@ -4,6 +4,8 @@ import { Form, Button, Container, Row, Col, Image } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom'; // Импортируем хук useNavigate
 import { UserContext } from '../Context/UserContext';
 import axios from 'axios';
+import Table from 'react-bootstrap/Table';
+import { GetProducts } from '../services/prodService';
 
 
 export function Profile() {
@@ -78,9 +80,38 @@ export function Profile() {
             }
             
         };
-        console.log(res)
-    
-
+        console.log(id_ac)
+        if (id_ac == 22){
+            const {data, loading,error} = GetProducts();
+            
+            return(
+                <Container style={{justifyContent: "center"}}>
+                <Form onSubmit={handleSubmit}>
+                <Table bordered hover size="sm" variant="dark" style={{width: '50%', marginTop: '50px', marginLeft: "25%"}}>
+                    <tbody>
+                {data.map((item, index) => (
+                    <tr>
+                        <td>{item.name}</td>
+                        <td><input placeholder={item.price} required></input> руб.</td>
+                    </tr>
+                ))}
+                </tbody>
+                </Table>
+                <Container fluid style={{display:"flex", width:'50%'}}>
+                    <Button onClick={handleLogout} 
+                    variant="outline-light"
+                    className="mt-auto w-100"
+                    style={{marginRight: "20px"}}>Сохранить</Button>
+                    <Button onClick={handleLogout} 
+                    variant="outline-light"
+                    className="mt-auto w-100"
+                    style={{marginLeft:"20px"}}>Сохранить</Button>
+                </Container>
+                </Form>
+                </Container>
+            )
+        }
+        else{ 
     return (
         <Container>
             <Row className="justify-content-md-center mt-5">
@@ -162,5 +193,6 @@ export function Profile() {
             </Row>
         </Container>
     );
+}
 }
 }

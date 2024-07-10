@@ -1,7 +1,9 @@
 import React, {Component} from "react";
 import Figure from 'react-bootstrap/Figure';
-import Papa from '../Components/Papich.jpg'
-import Yas from '../Components/Yasuo.jpg'
+
+import Papa from '../Components/images/ins/l3.jpg'
+import Yas from '../Components/images/ins/l4.jpg'
+
 
 
 export function Autor() {

@@ -25,7 +25,10 @@ export function Home(){
     }
     
     return (
-        <Container style={{ marginTop: '50px'}}>
+        <>
+        <h2 style={{ marginTop: '20px'}}>Справочник по дронам и квадрокоптерам</h2>
+        <Container style={{ marginTop: '20px'}}>
+            
             <Row className="g-4">
                 {data.map((card, index) => (
                     <Col key={index}  xs={15} sm={6} md={4} lg={3} >
@@ -34,5 +37,6 @@ export function Home(){
                 ))}
             </Row>
         </Container>
+        </>
     );
     }
