@@ -56,14 +56,39 @@ export function Profile() {
     };
 
     const userStr = localStorage.getItem('user');
+
+
     let res = null;
 
     if (!userStr) {
         return <Navigate to="/login" />;
     }
     else{
+        const handleInputChange = (id, value) => {
+            setFormData(prevState => ({
+                ...prevState,
+                [id]: value
+            }));
+        };
+    
+        const productSubmit = async (id) => {
+            try {
+                const response = await axios.patch(`http://127.0.0.1:8000/api/products/${id}/`, {
+                    price: formData[id]
+                });
+            if (response.status == 200){
+                const accid = 'accept'+id
+                document.getElementById(accid).style.display = 'block';
+                console.log(response.status)
+            }
+            } catch (error) {
+                console.error(error);
+            }
+        };
+    
         const id_ac = JSON.parse(userStr).id_accounts
         const handleSubmit = async (e) => {
+            
             e.preventDefault();
             try {
                 const response = await axios.put('http://127.0.0.1:8000/api/accounts/'+id_ac+'/', formData, {
@@ -87,25 +112,38 @@ export function Profile() {
             return(
                 <Container style={{justifyContent: "center"}}>
                 <Form onSubmit={handleSubmit}>
-                <Table bordered hover size="sm" variant="dark" style={{width: '50%', marginTop: '50px', marginLeft: "25%"}}>
-                    <tbody>
+                <Table bordered hover size="sm" variant="dark" style={{ width: '60%', marginTop: '50px', marginLeft: "20%" }}>
+            <tbody>
                 {data.map((item, index) => (
-                    <tr>
+                    <tr key={index}>
                         <td>{item.name}</td>
-                        <td><input placeholder={item.price} required></input> руб.</td>
+                        <td>
+                            <input 
+                                placeholder={item.price} 
+                                required 
+                                onChange={(e) => handleInputChange(item.id_product, e.target.value)} 
+                            /> 
+                        </td>
+                        <td>
+                            
+                            <button id={'button'+item.id_product} onClick={() => productSubmit(item.id_product)}
+                            >
+                                Cохранить
+                            </button>
+                            
+                        </td>
+                        <td style={{width:'100px'}}>
+                            <p id={'accept'+item.id_product} style={{display: 'none'}}>Успешно</p>
+                        </td>
                     </tr>
                 ))}
-                </tbody>
-                </Table>
+            </tbody>
+        </Table>
                 <Container fluid style={{display:"flex", width:'50%'}}>
                     <Button onClick={handleLogout} 
                     variant="outline-light"
                     className="mt-auto w-100"
-                    style={{marginRight: "20px"}}>Сохранить</Button>
-                    <Button onClick={handleLogout} 
-                    variant="outline-light"
-                    className="mt-auto w-100"
-                    style={{marginLeft:"20px"}}>Сохранить</Button>
+                    style={{marginRight: "20px"}}>Выйти</Button>
                 </Container>
                 </Form>
                 </Container>
