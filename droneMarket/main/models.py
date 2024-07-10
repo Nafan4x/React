@@ -14,7 +14,7 @@ class Products(models.Model):
 
     id_product = models.AutoField(primary_key=True)
     name = models.CharField(max_length=50, blank=False, null=False, unique=True)
-    price = models.BigIntegerField(blank=False, null=False)
+    price = models.CharField(max_length=50, default='По запросу')
     description = models.CharField(max_length=10000, blank=False, null=False)
     brand = models.CharField(max_length=50, default=None, null=True)
     video_transmission = models.CharField(max_length=50, default=None, null=True)
