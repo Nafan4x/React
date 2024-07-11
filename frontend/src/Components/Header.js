@@ -27,14 +27,14 @@ export function Header() {
                         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav" style={{justifyContent: "space-between", paddingRight: "20px"}} >
                         <Nav className="mr-auto">
-                            <Nav.Link href="/history">History</Nav.Link>
-                            <Nav.Link href="/contacts">Contacts</Nav.Link>
+                            <Nav.Link href="/history">История</Nav.Link>
+                            <Nav.Link href="/contacts">Контакты</Nav.Link>
                         </Nav>
                         <Nav className="ml-auto">
                             {user
                             ?
                                 <Nav.Item >
-                                <Nav.Link href="/profile">Profile</Nav.Link>
+                                <Nav.Link href="/profile">Профиль</Nav.Link>
                                 </Nav.Item>
                             :
                                 <>
